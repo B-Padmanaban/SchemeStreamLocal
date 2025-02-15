@@ -1,7 +1,10 @@
+const mongoose = require('mongoose');
+
+
 const applicationSchema = new mongoose.Schema({
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    scheme: { type: mongoose.Schema.Types.ObjectId, ref: 'Scheme' },
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    scheme: { type: mongoose.Schema.Types.ObjectId, ref: 'Scheme', required: true },
     status: { type: String, enum: ['applied', 'in-review', 'approved', 'rejected'], default: 'applied' },
-    submittedAt: { type: Date, default: Date.now }
+    appliedAt: { type: Date, default: Date.now }
 });
 module.exports = mongoose.model('Application', applicationSchema);
