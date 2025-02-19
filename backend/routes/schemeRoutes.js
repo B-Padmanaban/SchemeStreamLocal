@@ -17,7 +17,7 @@ router.get('/:category', auth, async (req, res) => {
 
 // Add a new scheme (accessible only to authority users)
 router.post('/', auth, async (req, res) => {
-    if (req.user.role !== 'authority') {
+    if (req.user.role !== 'admin') {
         return res.status(403).send('Access denied. Only authority can add schemes.');
     }
     const scheme = new Scheme(req.body);
@@ -40,7 +40,7 @@ router.get('/', async (req, res) => {
 
 // Update a scheme (accessible only to authority users)
 router.put('/:id', auth, async (req, res) => {
-    if (req.user.role !== 'authority') {
+    if (req.user.role !== 'admin') {
         return res.status(403).send('Access denied. Only authority can update schemes.');
     }
     try {
@@ -55,7 +55,7 @@ router.put('/:id', auth, async (req, res) => {
 
 // Delete a scheme (accessible only to authority users)
 router.delete('/:id', auth, async (req, res) => {
-    if (req.user.role !== 'authority') {
+    if (req.user.role !== 'admin') {
         return res.status(403).send('Access denied. Only authority can delete schemes.');
     }
     await Scheme.findByIdAndDelete(req.params.id);
