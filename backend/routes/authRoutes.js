@@ -8,7 +8,7 @@ const User = require('../models/userModel');
 router.post('/register', async (req, res) => {
     try {
         console.log('Register endpoint hit');  // Log when endpoint is reached
-        const { email, password, role } = req.body;
+        const {name, email, password, role } = req.body;
         console.log('Request body:', req.body);  // Log request body
 
         const existingUser = await User.findOne({ email });
@@ -20,7 +20,7 @@ router.post('/register', async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
         console.log('Password hashed successfully');  // Log after password hash
 
-        const user = new User({ email, password: hashedPassword, role });
+        const user = new User({name, email, password: hashedPassword, role });
         await user.save();
         console.log('User saved successfully');  // Log after saving user
 
