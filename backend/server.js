@@ -1,23 +1,28 @@
 require('dotenv').config();
 const express = require('express');
-const app = express();
-const authRoutes = require('./routes/authRoutes.js');
-const schemeRoutes = require('./routes/schemeRoutes.js');
-const applicationRoutes = require('./routes/applicationRoutes.js');
+const authRoutes = require('./routes/authRoutes');
+const schemeRoutes = require('./routes/schemeRoutes');
+const applicationRoutes = require('./routes/applicationRoutes');
 const mongoose = require('mongoose');
+const cors = require('cors'); // Import CORS
+
 
 // Connect to MongoDB Atlas
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of 10s
-  socketTimeoutMS: 45000, // Keep socket open for 45s
-})
-  .then(() => console.log('MongoDB connected successfully'))
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log('MongoDB connected to Atlas'))
   .catch(err => console.error('MongoDB connection error:', err));
 
 // Middleware
+const app = express();
 app.use(express.json());
+
+app.use(cors({ 
+  origin: "https://scheme-stream-fe.vercel.app", // Allow frontend origin
+  methods: "GET, POST, PUT, DELETE, OPTIONS",
+  allowedHeaders: "Content-Type, Authorization",
+  credentials: true
+}));
+app.options('*', cors());
 
 // Routes
 app.use('/api/auth', authRoutes);
@@ -36,6 +41,5 @@ app.use((err, req, res, next) => {
     res.status(500).send('Something broke!');
 });
 
-// Start Server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// ✅ Instead of app.listen, export app for Vercel
+module.exports = app;

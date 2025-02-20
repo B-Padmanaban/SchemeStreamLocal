@@ -1,9 +1,8 @@
 require('dotenv').config();
 const express = require('express');
-const app = express();
-const authRoutes = require('../routes/authRoutes.js');
-const schemeRoutes = require('../routes/schemeRoutes.js');
-const applicationRoutes = require('../routes/applicationRoutes.js');
+const authRoutes = require('./routes/authRoutes');
+const schemeRoutes = require('./routes/schemeRoutes');
+const applicationRoutes = require('./routes/applicationRoutes');
 const mongoose = require('mongoose');
 const cors = require('cors'); // Import CORS
 
@@ -14,16 +13,16 @@ mongoose.connect(process.env.MONGO_URI)
   .catch(err => console.error('MongoDB connection error:', err));
 
 // Middleware
+const app = express();
 app.use(express.json());
-app.options('*', cors());
-const cors = require('cors'); // Import CORS
+
 app.use(cors({ 
   origin: "https://scheme-stream-fe.vercel.app", // Allow frontend origin
   methods: "GET, POST, PUT, DELETE, OPTIONS",
   allowedHeaders: "Content-Type, Authorization",
-  credentials: false
+  credentials: true
 }));
-
+app.options('*', cors());
 
 // Routes
 app.use('/api/auth', authRoutes);
@@ -43,4 +42,4 @@ app.use((err, req, res, next) => {
 });
 
 // ✅ Instead of app.listen, export app for Vercel
-module.exports = app;git 
+module.exports = app;
