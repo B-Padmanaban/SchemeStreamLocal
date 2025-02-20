@@ -16,6 +16,7 @@ mongoose.connect(process.env.MONGO_URI)
 // Middleware
 app.use(express.json());
 app.use(cors()); // Enable CORS for all routes
+app.options('*', cors());
 
 // Routes
 app.use('/api/auth', authRoutes);
