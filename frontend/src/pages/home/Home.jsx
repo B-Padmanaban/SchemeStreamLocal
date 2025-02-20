@@ -16,7 +16,7 @@ import Train from '../../assets/train.png'
 import Safe from '../../assets/safe.png'
 import Health from '../../assets/health.png'
 import Child from '../../assets/child.png'
-import Sports from '../../assets/Sports.png'
+import Sports from '../../assets/sports.png'
 
 const Username = "Username";
 
