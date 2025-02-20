@@ -21,7 +21,7 @@ app.use(cors({
   origin: "https://scheme-stream-fe.vercel.app", // Allow frontend origin
   methods: "GET, POST, PUT, DELETE, OPTIONS",
   allowedHeaders: "Content-Type, Authorization",
-  credentials: true
+  credentials: false
 }));
 
 
