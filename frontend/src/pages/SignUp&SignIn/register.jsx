@@ -10,7 +10,7 @@ const Register = () => {
   const [error, setError] = useState("");  
   const navigate = useNavigate();  
 
-  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5001"; // Use Vite env variable or fallback
+  const API_URL = import.meta.env.VITE_API_URL; // Use Vite env variable or fallback
   console.log("API URL:", API_URL); // Debugging API URL
 
   const handleRegister = async (e) => {
