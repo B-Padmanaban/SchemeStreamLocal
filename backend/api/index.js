@@ -5,6 +5,8 @@ const authRoutes = require('../routes/authRoutes.js');
 const schemeRoutes = require('../routes/schemeRoutes.js');
 const applicationRoutes = require('../routes/applicationRoutes.js');
 const mongoose = require('mongoose');
+const cors = require('cors'); // Import CORS
+
 
 // Connect to MongoDB Atlas
 mongoose.connect(process.env.MONGO_URI)
@@ -13,6 +15,7 @@ mongoose.connect(process.env.MONGO_URI)
 
 // Middleware
 app.use(express.json());
+app.use(cors()); // Enable CORS for all routes
 
 // Routes
 app.use('/api/auth', authRoutes);
