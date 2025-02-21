@@ -15,7 +15,6 @@ mongoose.connect(process.env.MONGO_URI)
 // Middleware
 const app = express();
 app.use(express.json());
-
 app.use(cors({ 
   origin: "https://scheme-stream-fe.vercel.app", // Allow frontend origin
   methods: "GET, POST, PUT, DELETE, OPTIONS",
@@ -40,5 +39,9 @@ app.use((err, req, res, next) => {
     res.status(500).send('Something broke!');
 });
 
-// ✅ Instead of app.listen, export app for Vercel
+app.get("/",(req, res) =>{
+  res.send("Backend is running!");
+});
+
+// Instead of app.listen, export app for Vercel
 module.exports = app;
