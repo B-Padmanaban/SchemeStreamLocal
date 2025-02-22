@@ -16,7 +16,7 @@ mongoose.connect(process.env.MONGO_URI)
 const app = express();
 app.use(express.json());
 app.use(cors({ 
-  origin: "https://scheme-stream-fe.vercel.app", // Allow frontend origin
+  origin: "https://scheme-stream-frontend.vercel.app", // Allow frontend origin
   methods: "GET, POST, PUT, DELETE, OPTIONS",
   allowedHeaders: "Content-Type, Authorization",
   credentials: true
