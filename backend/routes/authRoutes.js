@@ -7,23 +7,17 @@ const User = require('../models/userModel');
 // Register User
 router.post('/register', async (req, res) => {
     try {
-        console.log('Register endpoint hit');  // Log when endpoint is reached
         const {email, password, role } = req.body;
-        console.log('Request body:', req.body);  // Log request body
-
         const existingUser = await User.findOne({ email });
         if (existingUser) {
-            console.log('User already exists');  // Log existing user
             return res.status(400).send('User already exists');
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
         const user = new User({email, password: hashedPassword, role });
         await user.save();
-        console.log('User saved successfully');  // Log after saving user
         res.send('User registered successfully');
     } catch (err) {
-        console.error('Error in register:', err);  // Log any error
         res.status(500).send('Registeration Failed');
     }
 });
