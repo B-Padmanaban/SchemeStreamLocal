@@ -11,12 +11,12 @@ import Bank from '../../assets/bank.png'
 import House from '../../assets/house.png'
 import Skill from '../../assets/skill.png'
 import Tra from '../../assets/travel.png'
-import Soc from '../../assets/Social.png'
+import Soc from '../../assets/social.png'
 import Train from '../../assets/train.png'
 import Safe from '../../assets/safe.png'
 import Health from '../../assets/health.png'
 import Child from '../../assets/child.png'
-import Sports from '../../assets/Sports.png'
+import Sports from '../../assets/sports.png'
 
 const Username = "Username";
 
